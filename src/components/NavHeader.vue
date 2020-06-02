@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="nav-header" v-bind:class="{'is-hide':isHide}">
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -40,11 +40,43 @@
   </div>
 </template>
 <script>
+export default {
+  name: "nav-header",
+  data() {
+    return {
+      isHide: false
+      // todo 向上滚动重新显示
+    };
+  },
+  mounted() {
+    window.addEventListener("scroll", this.initHeight);
+  },
+  methods: {
+    initHeight() {
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      this.isHide = scrollTop > 200 ? true : false;
+    }
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.initHeight, false);
+  }
+};
 </script>
 <style lang="scss">
-.header {
+.nav-header {
   height: 80px;
   background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: all 0.6s;
+  z-index: 1;
+  &.is-hide {
+    top: -80px;
+  }
   .nav-home {
     a {
       font-size: 26px;

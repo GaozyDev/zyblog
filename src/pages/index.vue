@@ -1,8 +1,8 @@
 <template>
   <div>
-    <nav-header class="nav-header"></nav-header>
-    <router-view class="router-view"></router-view>
-    <nav-footer class="nav-footer"></nav-footer>
+    <nav-header></nav-header>
+    <router-view></router-view>
+    <nav-footer></nav-footer>
   </div>
 </template>
 <script>
@@ -17,19 +17,4 @@ export default {
 };
 </script>
 <style lang="scss">
-.content {
-  .nav-header {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-  }
-  .router-view {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-}
 </style>

@@ -19,7 +19,28 @@
         <div class="portrait"></div>
       </div>
     </div>
-    <div>text</div>
+    <div class="about-me">
+      <div class="container">
+        <h2>About Me(关于我)</h2>
+        <div class="more-info">
+          <div>
+            <strong>作者：</strong> ZongYang...
+          </div>
+          <div>
+            <strong>爱好：</strong>爱游泳，爱爬山，爱发明，爱创新，爱研究，也爱想象，热爱天文，喜欢电子产品，向往极地运动...
+          </div>
+          <div>
+            <strong>编程：</strong>我小时候其实没想过会学编程，只想着学习数学、物理长大以后当数学家、科学家；想想都有些小激动呢。天意弄人啊，机缘巧合下，大学选择了计算机，从此开始了我的编程生涯...
+          </div>
+          <div>
+            <strong>忆尘夕：</strong>一直有这样一种感觉，愿灰尘的记忆如夕阳般美好!
+          </div>
+          <div class="motto">
+            <strong>——初学者的心态；愿此生不悔！</strong>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -74,6 +95,22 @@ export default {
         background-size: cover;
         background: url("/imgs/portrait.png") no-repeat center right;
         background-size: contain;
+      }
+    }
+  }
+  .about-me {
+    padding: 80px 0;
+    background-color: rgba(242, 242, 241, 1);
+    h2 {
+      text-align: center;
+      font-size: 36px;
+    }
+    .more-info {
+      margin-top: 50px;
+      font-size: 22px;
+      .motto {
+        margin-top: 20px;
+        text-align: right;
       }
     }
   }

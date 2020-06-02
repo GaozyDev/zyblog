@@ -1,21 +1,23 @@
 <template>
-  <div class="content">
+  <div>
     <nav-header class="nav-header"></nav-header>
     <router-view class="router-view"></router-view>
+    <nav-footer class="nav-footer"></nav-footer>
   </div>
 </template>
 <script>
 import NavHeader from "./../components/NavHeader";
+import NavFooter from "./../components/NavFooter";
 export default {
   name: "nav-home",
   components: {
-    NavHeader
+    NavHeader,
+    NavFooter
   }
 };
 </script>
 <style lang="scss">
 .content {
-  position: relative;
   .nav-header {
     position: absolute;
     width: 100%;

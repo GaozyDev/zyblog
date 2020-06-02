@@ -41,6 +41,21 @@
         </div>
       </div>
     </div>
+    <div class="works-display">
+      <div class="container">
+        <h2>This Works (作品)</h2>
+      </div>
+    </div>
+    <div class="technical-ability">
+      <div class="container">
+        <h2>Technical Ability (技能)</h2>
+      </div>
+    </div>
+    <div class="more-information">
+      <div class="container">
+        <h2>More Information(更多)</h2>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -112,6 +127,31 @@ export default {
         margin-top: 20px;
         text-align: right;
       }
+    }
+  }
+  .works-display {
+    padding: 80px 0;
+    background-color: #34475e;
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      color: #ffffff;
+    }
+  }
+  .technical-ability {
+    padding: 80px 0;
+    background-color: #43b5e9;
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      color: #ffffff;
+    }
+  }
+  .more-information {
+    padding: 80px 0;
+    h2 {
+      text-align: center;
+      font-size: 36px;
     }
   }
 }

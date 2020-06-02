@@ -1,0 +1,20 @@
+.container {
+  position: relative;
+  width: 1226px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: block;
+}
+.clearfix:after {
+  clear: both;
+}

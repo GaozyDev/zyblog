@@ -21,7 +21,7 @@
     </div>
     <div class="about-me">
       <div class="container">
-        <h2>About Me(关于我)</h2>
+        <div class="title">About Me(关于我)</div>
         <div class="more-info">
           <div>
             <strong>作者：</strong> ZongYang...
@@ -43,24 +43,59 @@
     </div>
     <div class="works-display">
       <div class="container">
-        <h2>This Works (作品)</h2>
+        <div class="title">This Works (作品)</div>
+        <div class="works">
+          <swiper class="swiper" :options="swiperOption">
+            <swiper-slide class="slide-1"></swiper-slide>
+            <swiper-slide class="slide-2"></swiper-slide>
+            <swiper-slide class="slide-3"></swiper-slide>
+            <swiper-slide class="slide-4"></swiper-slide>
+            <swiper-slide class="slide-5"></swiper-slide>
+            <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
+          </swiper>
+        </div>
       </div>
     </div>
     <div class="technical-ability">
       <div class="container">
-        <h2>Technical Ability (技能)</h2>
+        <div class="title">Technical Ability (技能)</div>
       </div>
     </div>
     <div class="more-information">
       <div class="container">
-        <h2>More Information(更多)</h2>
+        <div class="title">More Information(更多)</div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 export default {
-  name: "home"
+  name: "home",
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  data() {
+    return {
+      swiperOption: {
+        autoplay: {
+          delay: 5000
+        },
+        loop: true,
+        speed: 1500,
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        }
+      }
+    };
+  }
 };
 </script>
 <style lang="scss">
@@ -116,7 +151,7 @@ export default {
   .about-me {
     padding: 80px 0;
     background-color: rgba(242, 242, 241, 1);
-    h2 {
+    .title {
       text-align: center;
       font-size: 36px;
     }
@@ -132,16 +167,41 @@ export default {
   .works-display {
     padding: 80px 0;
     background-color: #34475e;
-    h2 {
+    .title {
       text-align: center;
       font-size: 36px;
       color: #ffffff;
+    }
+    .works {
+      .swiper {
+        height: 600px;
+        margin-top: 20px;
+        .swiper-slide {
+          background-position: center;
+          background-size: cover;
+          &.slide-1 {
+            background-color: #ffffff;
+          }
+          &.slide-2 {
+            background-image: url("/imgs/home-bg.jpg");
+          }
+          &.slide-3 {
+            background-color: #ffffff;
+          }
+          &.slide-4 {
+            background-image: url("/imgs/home-bg.jpg");
+          }
+          &.slide-5 {
+            background-color: #ffffff;
+          }
+        }
+      }
     }
   }
   .technical-ability {
     padding: 80px 0;
     background-color: #43b5e9;
-    h2 {
+    .title {
       text-align: center;
       font-size: 36px;
       color: #ffffff;
@@ -149,7 +209,7 @@ export default {
   }
   .more-information {
     padding: 80px 0;
-    h2 {
+    .title {
       text-align: center;
       font-size: 36px;
     }

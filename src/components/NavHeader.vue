@@ -44,8 +44,8 @@ export default {
   name: "nav-header",
   data() {
     return {
-      isHide: false
-      // todo 向上滚动重新显示
+      isHide: false,
+      scrollTopLast: 0
     };
   },
   mounted() {
@@ -57,7 +57,13 @@ export default {
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop;
-      this.isHide = scrollTop > 200 ? true : false;
+      if (scrollTop - this.scrollTopLast > 200) {
+        this.isHide = true;
+        this.scrollTopLast = scrollTop;
+      } else if (scrollTop - this.scrollTopLast < -200) {
+        this.isHide = false;
+        this.scrollTopLast = scrollTop;
+      }
     }
   },
   destroyed() {

@@ -46,11 +46,18 @@
         <div class="title">This Works (作品)</div>
         <div class="works">
           <swiper class="swiper" :options="swiperOption">
-            <swiper-slide class="slide-1"></swiper-slide>
-            <swiper-slide class="slide-2"></swiper-slide>
-            <swiper-slide class="slide-3"></swiper-slide>
-            <swiper-slide class="slide-4"></swiper-slide>
-            <swiper-slide class="slide-5"></swiper-slide>
+            <swiper-slide class="slide-1">
+              <div>
+                <div class="img fl"></div>
+                <div class="text">文案文案</div>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-2">
+              <div>
+                <div class="img fl"></div>
+                <div class="text">文案文案文案</div>
+              </div>
+            </swiper-slide>
             <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
           </swiper>
         </div>
@@ -180,19 +187,34 @@ export default {
           background-position: center;
           background-size: cover;
           &.slide-1 {
-            background-color: #ffffff;
+            padding: 0 80px;
+            .img {
+              margin: 50px;
+              height: 500px;
+              width: 300px;
+              background-color:burlywood;
+            }
+            .text {
+              margin: 50px;
+              font-size: 20px;
+              color: #ffffff;
+            }
           }
           &.slide-2 {
-            background-image: url("/imgs/home-bg.jpg");
-          }
-          &.slide-3 {
-            background-color: #ffffff;
-          }
-          &.slide-4 {
-            background-image: url("/imgs/home-bg.jpg");
-          }
-          &.slide-5 {
-            background-color: #ffffff;
+            padding: 0 80px;
+            .img {
+              margin: 50px;
+              height: 500px;
+              width: 300px;
+              background-image: url("/imgs/compass.jpg");
+              background-size: contain;
+              background-repeat: no-repeat;
+            }
+            .text {
+              margin: 50px;
+              font-size: 20px;
+              color: #ffffff;
+            }
           }
         }
       }

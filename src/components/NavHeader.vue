@@ -19,7 +19,7 @@
       <div class="nav-menu fl">
         <ul>
           <li class="fl">
-            <a href="/">作品</a>
+            <a href="javascript:;" @click="works">作品</a>
           </li>
           <li class="fl">
             <a href="/">便笺</a>
@@ -49,14 +49,19 @@ export default {
     };
   },
   mounted() {
+    this.scrollTopLast = this.getScrollTop();
     window.addEventListener("scroll", this.initHeight);
   },
   methods: {
-    initHeight() {
-      let scrollTop =
+    getScrollTop() {
+      return (
         window.pageYOffset ||
         document.documentElement.scrollTop ||
-        document.body.scrollTop;
+        document.body.scrollTop
+      );
+    },
+    initHeight() {
+      let scrollTop = this.getScrollTop();
       if (scrollTop - this.scrollTopLast > 200) {
         this.isHide = true;
         this.scrollTopLast = scrollTop;
@@ -64,6 +69,9 @@ export default {
         this.isHide = false;
         this.scrollTopLast = scrollTop;
       }
+    },
+    works() {
+      this.$router.push("/works");
     }
   },
   destroyed() {

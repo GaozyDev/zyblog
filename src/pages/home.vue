@@ -46,16 +46,21 @@
         <div class="title">This Works (作品)</div>
         <div class="works">
           <swiper class="swiper" :options="swiperOption">
-            <swiper-slide class="slide-1">
-              <div>
-                <div class="img fl"></div>
-                <div class="text">文案文案</div>
+            <swiper-slide class="swiper-slide" v-for="(item,index) in works" v-bind:key="index">
+              <div class="image fl">
+                <img v-bind:src="item.img" alt />
               </div>
-            </swiper-slide>
-            <swiper-slide class="slide-2">
-              <div>
-                <div class="img fl"></div>
-                <div class="text">文案文案文案</div>
+              <div class="text">
+                <span class="title">{{item.title}}</span>
+                <br />
+                <br />
+                <span class="desc">{{item.desc}}</span>
+                <br />
+                <br />
+                <span class="dev-background">{{item.devBackground}}</span>
+                <br />
+                <br />
+                <span class="download">{{item.download}}</span>
               </div>
             </swiper-slide>
             <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
@@ -88,19 +93,36 @@ export default {
     return {
       swiperOption: {
         autoplay: {
-          delay: 5000
+          delay: 8000
         },
         loop: true,
         speed: 1500,
-        effect: "fade",
-        fadeEffect: {
-          crossFade: true
-        },
         pagination: {
           el: ".swiper-pagination",
           clickable: true
         }
-      }
+      },
+      works: [
+        {
+          img: "/imgs/coolweather.png",
+          title: "Cool天气",
+          desc:
+            "使用Flutter开发的天气APP，准确预报未来两小时的降雨情况，精确到分钟级。",
+          devBackground:
+            "之前使用的是小米手机，感觉小米天气一直非常准确，特别是两小时的雨势预测功能非常赞，让我面对下雨天时有了很大的安全感，我可以在小米天气里看到几分钟之后下雨，几分钟之后变大，几分钟之后雨变小，什么时候雨会停。后来换到一加手机，没了两小时的雨势预测这个功能，总让我感觉少了点东西，加上我最近在学习Flutter，于是乎我用小米天气的数据源“彩云天气”和Flutter开发了这个APP。自从手机装上Cool天气，感觉再也不用怕下雨天了，哈哈。",
+          download:
+            "目前APP发布在酷安应用商店，感兴趣的话，可以点击下面的链接进行下载。 https://www.coolapk.com/apk/www.gl.com.coolweather"
+        },
+        {
+          img: "/imgs/compass.jpg",
+          title: "指南针",
+          desc: "一款简单好用的安卓指南针APP",
+          devBackground:
+            "本人有些路痴，一加手机又没有官方指南针应用，出门用导航都会走错方向，特别是走地下通道，唉~ 寻遍市场上所有指南针应用，发现要么带广告，要么界面太丑，想着也不难，所以花了点时间自己写了一个。",
+          download:
+            "目前APP发布在酷安应用商店，感兴趣的话，可以点击下面的链接进行下载。 https://www.coolapk.com/apk/com.sunny.www.compass"
+        }
+      ]
     };
   }
 };
@@ -181,39 +203,24 @@ export default {
     }
     .works {
       .swiper {
-        height: 600px;
-        margin-top: 20px;
+        height: 520px;
+        margin-top: 60px;
         .swiper-slide {
-          background-position: center;
-          background-size: cover;
-          &.slide-1 {
-            padding: 0 80px;
-            .img {
-              margin: 50px;
-              height: 500px;
-              width: 300px;
-              background-color:burlywood;
-            }
-            .text {
-              margin: 50px;
-              font-size: 20px;
-              color: #ffffff;
-            }
+          padding: 0 100px;
+          box-sizing: border-box;
+          img {
+            width: 270px;
+            height: 480px;
           }
-          &.slide-2 {
-            padding: 0 80px;
-            .img {
-              margin: 50px;
-              height: 500px;
-              width: 300px;
-              background-image: url("/imgs/compass.jpg");
-              background-size: contain;
-              background-repeat: no-repeat;
-            }
-            .text {
-              margin: 50px;
-              font-size: 20px;
-              color: #ffffff;
+          .text {
+            box-sizing: border-box;
+            padding: 20px;
+            margin-left: 300px;
+            height: 480px;
+            color: #ffffff;
+            font-size: 20px;
+            .title {
+              font-size: 24px;
             }
           }
         }

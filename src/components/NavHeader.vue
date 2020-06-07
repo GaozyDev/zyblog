@@ -87,7 +87,7 @@ export default {
   top: 0;
   width: 100%;
   transition: all 0.6s;
-  z-index: 1;
+  z-index: 2;
   &.is-hide {
     top: -80px;
   }

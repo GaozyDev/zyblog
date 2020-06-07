@@ -71,6 +71,7 @@
     <div class="technical-ability">
       <div class="container">
         <div class="title">Technical Ability (技能)</div>
+        <div class="chart" id="chart" :style="{width: '800px', height: '600px'}"></div>
       </div>
     </div>
     <div class="more-information">
@@ -83,11 +84,47 @@
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import ".././assets/js/shine.js";
 export default {
   name: "home",
   components: {
     Swiper,
     SwiperSlide
+  },
+  mounted() {
+    this.drawLine();
+  },
+  methods: {
+    drawLine() {
+      var echarts = require("echarts/lib/echarts");
+      require("echarts/lib/chart/pie");
+      let chart = echarts.init(document.getElementById("chart"), "shine");
+      chart.setOption({
+        series: [
+          {
+            type: "pie",
+            radius: "95%",
+            data: [
+              { value: 3, name: "Java" },
+              { value: 3, name: "Android" },
+              { value: 1, name: "Dart" },
+              { value: 2, name: "Flutter" },
+              { value: 1, name: "前端" },
+              { value: 1, name: "Vue" }
+            ],
+            itemStyle: {
+              normal: {
+                label: {
+                  textStyle: {
+                    fontSize: 20
+                  }
+                }
+              }
+            }
+          }
+        ]
+      });
+    }
   },
   data() {
     return {
@@ -204,7 +241,7 @@ export default {
     .works {
       .swiper {
         height: 520px;
-        margin-top: 60px;
+        margin-top: 80px;
         .swiper-slide {
           padding: 0 100px;
           box-sizing: border-box;
@@ -218,7 +255,7 @@ export default {
             margin-left: 300px;
             height: 480px;
             color: #ffffff;
-            font-size: 20px;
+            font-size: 18px;
             .title {
               font-size: 24px;
             }
@@ -234,6 +271,11 @@ export default {
       text-align: center;
       font-size: 36px;
       color: #ffffff;
+    }
+    .chart {
+      margin-top: 80px;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
   .more-information {

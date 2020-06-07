@@ -1,9 +1,9 @@
 <template>
-  <div class="works">works</div>
+  <div class="work">work</div>
 </template>
 <script>
 export default {
-  name: "works"
+  name: "work"
 };
 </script>
 <style lang="scss">

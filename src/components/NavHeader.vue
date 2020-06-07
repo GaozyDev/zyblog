@@ -19,10 +19,10 @@
       <div class="nav-menu fl">
         <ul>
           <li class="fl">
-            <a href="javascript:;" @click="works">作品</a>
+            <a href="javascript:;" @click="work">作品</a>
           </li>
           <li class="fl">
-            <a href="/">便笺</a>
+            <a href="javascript:;" @click="blog">博客</a>
           </li>
           <li class="fl">
             <a href="/">关于</a>
@@ -70,8 +70,11 @@ export default {
         this.scrollTopLast = scrollTop;
       }
     },
-    works() {
-      this.$router.push("/works");
+    work() {
+      this.$router.push("/work");
+    },
+    blog() {
+      this.$router.push("/blog");
     }
   },
   destroyed() {

@@ -21,7 +21,7 @@
     </div>
     <div class="about-me">
       <div class="container">
-        <div class="title">About Me(关于我)</div>
+        <div class="title">About Me</div>
         <div class="more-info">
           <div>
             <strong>作者：</strong> ZongYang...
@@ -43,7 +43,7 @@
     </div>
     <div class="works-display">
       <div class="container">
-        <div class="title">This Works (作品)</div>
+        <div class="title">This Works</div>
         <div class="works">
           <swiper class="swiper" :options="swiperOption">
             <swiper-slide class="swiper-slide" v-for="(item,index) in works" v-bind:key="index">
@@ -70,13 +70,13 @@
     </div>
     <div class="technical-ability">
       <div class="container">
-        <div class="title">Technical Ability (技能)</div>
+        <div class="title">Technical Ability</div>
         <div class="chart" id="chart" :style="{width: '800px', height: '600px'}"></div>
       </div>
     </div>
     <div class="more-information">
       <div class="container">
-        <div class="title">More Information(更多)</div>
+        <div class="title">About Programming</div>
       </div>
     </div>
   </div>

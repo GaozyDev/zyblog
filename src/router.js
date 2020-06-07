@@ -2,7 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Index from "./pages/index";
 import Home from "./pages/home";
-import Works from "./pages/works";
+import Work from "./pages/work";
+import Blog from "./pages/blog";
 import NCEE from "./pages/NCEE";
 
 Vue.use(Router);
@@ -21,9 +22,14 @@ export default new Router({
           component: Home,
         },
         {
-          path: "/works",
-          name: "works",
-          component: Works,
+          path: "/work",
+          name: "work",
+          component: Work,
+        },
+        {
+          path: "/blog",
+          name: "blog",
+          component: Blog,
         },
       ],
     },

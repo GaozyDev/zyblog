@@ -3,7 +3,8 @@ import Router from "vue-router";
 import Index from "./pages/index";
 import Home from "./pages/home";
 import Work from "./pages/work";
-import Blog from "./pages/blog";
+import BlogList from "./pages/blogList";
+import BlogDetail from "./pages/blogDetail"
 import NCEE from "./pages/NCEE";
 
 Vue.use(Router);
@@ -29,8 +30,13 @@ export default new Router({
         {
           path: "/blog",
           name: "blog",
-          component: Blog,
+          component: BlogList,
         },
+        {
+          path: '/blog/:id',
+          name: 'blog-detail',
+          component: BlogDetail,
+        }
       ],
     },
     {

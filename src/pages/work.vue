@@ -138,8 +138,7 @@ export default {
 </script>
 <style lang="scss">
 .work {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding: 100px 0;
   background-color: #f7f7f7;
   .work-top {
     background-color: #ffffff;

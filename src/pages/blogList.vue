@@ -107,6 +107,7 @@ export default {
     margin-top: 20px;
     margin-bottom: 50px;
     background-color: #ffffff;
+    width: 100%;
     .blog-item {
       padding: 40px 60px;
       .title {

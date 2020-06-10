@@ -46,12 +46,21 @@ export default {
         highlight: function(code) {
           return hljs.highlightAuto(code).value;
         },
-        pedantic: false,
-        gfm: true,
+        baseUrl: null,
         breaks: false,
+        gfm: true,
+        headerIds: true,
+        headerPrefix: "",
+        langPrefix: "language-",
+        mangle: true,
+        pedantic: false,
         sanitize: false,
-        smartLists: true,
+        sanitizer: null,
+        silent: false,
+        smartLists: false,
         smartypants: false,
+        tokenizer: null,
+        walkTokens: null,
         xhtml: false
       });
       this.axios.get("/jsonData").then(res => {
@@ -114,6 +123,19 @@ export default {
       margin-top: 50px;
       font-size: 16px;
       line-height: 2;
+      pre {
+        background-color: #f7f7f7;
+        padding: 10px;
+      }
+      img {
+        width: 100%;
+      }
+      blockquote {
+        padding: 0 15px;
+        color: #666;
+        border-left: 4px solid #ddd;
+        margin: 0;
+      }
     }
   }
 }

@@ -1,115 +1,115 @@
-Java通过Executors提供四种线程池，分别为：
+>总结自美团技术团队[《WebView 性能、体验分析与优化》](https://tech.meituan.com/2017/06/09/webviewperf.html)
+# 性能优化
 
-**newSingleThreadExecutor** 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+## WebView 为什么会感觉很慢？
 
-**newFixedThreadPool** 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+对于一个普通用户来讲，打开一个 WebView 通常会经历以下几个阶段：
 
-**newCachedThreadPool **创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程。当新任务添加到线程池，若无空闲线程，则新建线程。
+1. 交互无反馈
+2. 到达新的页面，页面白屏
+3. 页面基本框架出现，但是没有数据；页面处于 loading 状态
+4. 出现所需的数据
 
-**newScheduledThreadPool** 创建一个定长线程池，支持定时及周期性任务执行。
+如果从程序上观察，WebView 启动过程大概分为以下几个阶段：
 
-### 1、newSingleThreadExecutor
+![图片](https://uploader.shimo.im/f/03SYVyFWMl81NFHr.png!thumbnail)
 
-创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。示例代码如下：
+### WebView 初始化
 
-```
-/**
- * 单线程池
- */
-private static void newSingleThreadExecutor() {
-    ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-    for (int i = 0; i < 10; i++) {
-        final int index = i;
-        singleThreadExecutor.execute(() -> {
-            System.out.println(index + ":" + Thread.currentThread().getId());
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-}
-```
-### 2、newFixedThreadPool
+App 中打开 WebView 的第一步并不是建立连接，而是启动浏览器内核。
 
-创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。示例代码如下：
+优化
 
-```
-/**
- * 固定大小的线程池
- */
-private static void newFixedThreadPool() {
-    ExecutorService fixedThreadPool = Executors.newFixedThreadPool(2);
-    for (int i = 0; i < 10; i++) {
-        final int index = i;
-        fixedThreadPool.execute(() -> {
-            try {
-                System.out.println(index + ":" + Thread.currentThread());
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-}
-```
-因为线程池大小为2，每个任务输出 index 后sleep 2秒，所以每2秒打印2个数字。
-定长线程池的大小最好根据系统资源进行设置，如Runtime.getRuntime().availableProcessors()。
+使用全局 WebView
 
-### 3、**newCachedThreadPool**
+客户端代理数据请求
 
-创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。示例代码如下：
+### 建立连接/服务器处理
 
-```
-/**
- * 无限大小的线程池
- */
-private static void newCachedThreadPool() {
-    ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-    for (int i = 0; i < 10; i++) {
-        final int index = i;
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        cachedThreadPool.execute(() -> 
-                System.out.println(index + ":" + Thread.currentThread()));
-    }
-}
-```
-线程池为无限大，当执行第二个任务时第一个任务已经完成，会复用执行第一个任务的线程，而不用每次新建线程。
-### 4、newScheduledThreadPool
+DNS 域名解析，与服务器 connection，服务器逻辑处理都将耗费大量时间。
 
-创建一个定长线程池，支持定时及周期性任务执行。
+优化
 
-延迟执行示例代码如下：
+DNS 采用和客户端 API 相同的域名静态资源同理）                            
 
-```
-/**
- * 定时执行的线程池
- */
-private static void newScheduledDelayThreadPool() {
-    long startTimeMillis = System.currentTimeMillis();
-    ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
-    scheduledExecutorService.schedule(() -> System.out.println("delay millis:" + (System.currentTimeMillis() - startTimeMillis)), 
-            2, TimeUnit.SECONDS);
-}
-```
-表示延迟2秒执行。
-定期执行示例代码如下：
+同步渲染采用 chunk 编码
 
-```
-/**
- * 定时+循环执行的线程池
- */
-private static void newScheduledPeriodThreadPool() {
-    ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
-    long startTimeMillis = System.currentTimeMillis();
-    scheduledExecutorService.scheduleAtFixedRate(() -> 
-            System.out.println("delay millis:" + (System.currentTimeMillis() - startTimeMillis)), 
-            1, 2, TimeUnit.SECONDS);
-}
-```
-表示延迟1秒后每2秒执行一次。
+### 页面框架渲染
+
+页面在解析到足够多的节点，且所有 CSS 都加载完成后进行首屏渲染。在此之前，页面保持白屏；在页面完全下载并解析完成之前，页面处于不完整展示状态。
+
+优化
+
+1. CSS 的加载会在 HTML 解析到 CSS 的标签时开始，所以 CSS 的标签要尽量靠前。
+2. 但是，CSS 链接下面不能有任何的 JS 标签（包括很简单的内联 JS），否则会阻塞 HTML 的解析。
+3. 如果必须要在头部增加内联脚本，一定要放在 CSS 标签之前。
+### JS 加载
+
+随着网速越来越快，而 CPU 的速度反而没有提升（从 PC 到手机），JS 的时间开销就成为问题了。
+
+优化
+
+1. 高性能要求页面还是需要后端渲染。
+2. React 还是太重了，面向用户写系统需要谨慎考虑。
+3. JS 代码的编译和执行会有缓存，同 App 中网页尽量统一框架。
+## WebView 性能优化总结
+
+一个加载网页的过程中，native、网络、后端处理、CPU 都会参与，各自都有必要的工作和依赖关系；让他们相互并行处理而不是相互阻塞才可以让网页加载更快：
+
+1. WebView 初始化慢，可以在初始化同时先请求数据，让后端和网络不要闲着。
+2. 后端处理慢，可以让服务器分 trunk 输出，在后端计算的同时前端也加载网络静态资源。
+3. 脚本执行慢，就让脚本在最后运行，不阻塞页面解析。
+4. 同时，合理的预加载、预缓存可以让加载速度的瓶颈更小。
+5. WebView 初始化慢，就随时初始化好一个 WebView 待用。
+6. DNS 和链接慢，想办法复用客户端使用的域名和链接。
+7. 脚本执行慢，可以把框架代码拆分出来，在请求页面之前就执行好。
+# 其他用户体验优化
+
+### 禁掉长按选择
+
+在 WebView 中，长按文字会使得 WebView 默认开始选择文字；长按链接会弹出提示是否在新页面打开。
+
+解决方法：可以通过给 body 增加 CSS 来禁止这些默认规则。
+
+### 解决点击延迟
+
+在 WebView 中，click 通常会有大约 300ms 的延迟（同时包括链接的点击，表单的提交，控件的交互等任何用户点击行为）。
+
+唯一的例外是设置的 meta：viewpoint 为禁止缩放的 Chrome（然而并不是 Android 默认的浏览器）。
+
+解决方法：使用 fastclick 一般可以解决这个问题。
+
+### 页面滑动期间不渲染/执行
+
+WebView在滚动期间有各种限定：
+
+* Scroll Event 不触发
+* setTimeout 和 setInterval 不触发。
+* GIF 动画不播放。
+* 很多回调会延迟到页面停止滚动之后。
+* background-position: fixed 不支持。
+
+这些限制让 WebView 在滚动期间很难有较好的体验，并且大部分是不可突破的，但至少对于吸顶功能还是可以做一些支持，方法如下：
+
+* 在iOS上，使用position: sticky可以做到元素吸顶。
+* 在Android上，监听touchmove事件可以在滑动期间做元素的position切换（惯性运动期间就无效了）。
+### crash
+
+通常 WebView 并不能直接接触到底层的 API，因此比较稳定，但仍然有使用不当造成整个 App崩溃的情况，目前发现的案例包括：
+
+* 使用过大的图片（2M）
+* 不正常使用 WebGL
+# 安全优化
+
+## WebView 被运营商劫持、注入问题
+
+### 使用 CSP（Content Security Policy）
+
+### HTTPS
+
+### App 使用 Socket 代理请求
+
+## 客户端内打开第三方 WebView
+
+在内嵌的 WebView 中应该限制允许打开的 WebView 的域名，并设置运行访问的白名单。或者当用户打开外部链接前给用户强烈而明显的提示。
+

@@ -102,14 +102,16 @@ export default {
 .blog-list {
   margin-top: 80px;
   background-color: #f7f7f7;
+  text-align: center;
   .list {
+    text-align: left;
     display: inline-block;
     margin-top: 20px;
     margin-bottom: 50px;
     background-color: #ffffff;
-    width: 100%;
+    width: 1000px;
     .blog-item {
-      padding: 40px 60px;
+      padding: 40px 50px;
       .title {
         a {
           font-size: 26px;

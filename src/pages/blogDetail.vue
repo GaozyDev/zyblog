@@ -1,7 +1,7 @@
 <template>
   <div class="blog-detail">
     <div class="container">
-      <div class="article">
+      <div class="paper">
         <div class="title">{{title}}</div>
         <div class="meta">
           <img src="/imgs/ic-eye.png" alt />
@@ -15,6 +15,17 @@
         </div>
         <div class="divider"></div>
         <div id="markdown"></div>
+        <div class="catalogue-wrapper">
+          <div class="catalogue">
+            <div class="title">目录</div>
+            <ol>
+              <li>1、newSingleThreadExecutornewSingleThreadExecutor</li>
+              <li>2、newSingleThreadExecutor</li>
+              <li>3、newSingleThreadExecutor</li>
+              <li>4、newSingleThreadExecutor</li>
+            </ol>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -63,7 +74,7 @@ export default {
         walkTokens: null,
         xhtml: false
       });
-      this.axios.get("/jsonData3").then(res => {
+      this.axios.get("/jsonData2").then(res => {
         this.text = res.data;
         document.getElementById("markdown").innerHTML = marked(this.text);
       });
@@ -75,14 +86,16 @@ export default {
 .blog-detail {
   margin-top: 80px;
   background-color: #f7f7f7;
-  .article {
+  text-align: center;
+  .paper {
     background-color: #ffffff;
     margin: 20px 0;
     display: inline-block;
     width: 1000px;
-    padding: 80px 60px;
-    margin-left: 113px;
+    padding: 80px 50px;
     box-sizing: border-box;
+    position: relative;
+    text-align: left;
     .title {
       text-align: center;
       font-weight: 400;
@@ -186,11 +199,45 @@ export default {
         th {
           font-weight: bold;
           padding-left: 15px;
-          border: 1px solid #eee;
+          border: 1px solid #eeeeee;
         }
         td {
           padding-left: 15px;
-          border: 1px solid #eee;
+          border: 1px solid #eeeeee;
+        }
+      }
+    }
+    .catalogue-wrapper {
+      position: absolute;
+      right: -10px;
+      top: 0px;
+      .catalogue {
+        position: fixed;
+        width: 300px;
+        background-color: #ffffff;
+        padding: 20px;
+        .title {
+          color: #a5a5a5;
+          font-size: 15px;
+          text-align: left;
+          border-bottom: 1px solid #dddddd;
+          padding: 10px 0;
+          margin-bottom: 20px;
+        }
+        ol {
+          padding: 0;
+          li {
+            text-align: left;
+            font-size: 15px;
+            margin: 12px 0;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            cursor: pointer;
+            &:hover {
+              color: #0681d0;
+            }
+          }
         }
       }
     }

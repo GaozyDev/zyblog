@@ -213,7 +213,7 @@ export default {
       top: 0px;
       .catalogue {
         position: fixed;
-        width: 300px;
+        width: 250px;
         background-color: #ffffff;
         padding: 20px;
         .title {

@@ -2,6 +2,11 @@
   <div class="work">
     <div class="container">
       <div class="wrapper">
+        <div class="work-list">
+          <span>Cool天气</span> /
+          <span>Compass</span> /
+          <span>慕聊</span>
+        </div>
         <div class="work-top clearfix">
           <div class="icon">
             <img src="/imgs/ic-coolweather-launcher.png" alt />
@@ -13,6 +18,10 @@
             </div>
             <div class="message">21.3M / 3465下载 / 176人关注 / 71个评论 / 简体中文</div>
             <div class="download">下载APK</div>
+          </div>
+          <div class="qrcode">
+            <img src="/imgs/coolweather-qrcode.png" />
+            <p>扫码下载APK</p>
           </div>
         </div>
         <div class="work-detail-info">
@@ -146,6 +155,18 @@ export default {
   .wrapper {
     width: 1000px;
     display: inline-block;
+    .work-list {
+      text-align: left;
+      font-size: 18px;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      span {
+        cursor: pointer;
+        &:hover {
+          color: #0681d0;
+        }
+      }
+    }
     .work-top {
       text-align: left;
       background-color: #ffffff;
@@ -158,7 +179,8 @@ export default {
         }
       }
       .info {
-        margin-left: 110px;
+        margin-left: 20px;
+        float: left;
         .name {
           font-size: 22px;
           font-weight: normal;
@@ -186,6 +208,16 @@ export default {
           cursor: pointer;
         }
       }
+      .qrcode {
+        float: right;
+        text-align: center;
+        margin-right: 20px;
+        img {
+          width: 82px;
+          height: 82px;
+          float: right;
+        }
+      }
     }
     .work-detail-info {
       text-align: left;
@@ -193,7 +225,7 @@ export default {
       width: 100%;
       background-color: #ffffff;
       margin-top: 20px;
-      padding: 0 20px;
+      padding: 0 30px;
       box-sizing: border-box;
       &:last-child {
         padding-bottom: 40px;
@@ -208,7 +240,7 @@ export default {
         font-size: 14px;
         color: #666666;
         margin-bottom: 20px;
-        width: 80%;
+        width: 90%;
         line-height: 22px;
         .screenshot-list {
           height: 310px;

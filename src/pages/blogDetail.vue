@@ -14,7 +14,7 @@
           <span>{{date}}</span>
         </div>
         <div class="divider"></div>
-        <div class="text" id="text"></div>
+        <div id="markdown"></div>
       </div>
     </div>
   </div>
@@ -63,9 +63,9 @@ export default {
         walkTokens: null,
         xhtml: false
       });
-      this.axios.get("/jsonData").then(res => {
+      this.axios.get("/jsonData3").then(res => {
         this.text = res.data;
-        document.getElementById("text").innerHTML = marked(this.text);
+        document.getElementById("markdown").innerHTML = marked(this.text);
       });
     }
   }
@@ -77,11 +77,11 @@ export default {
   background-color: #f7f7f7;
   .article {
     background-color: #ffffff;
-    margin-top: 20px;
-    margin-bottom: 50px;
+    margin: 20px 0;
     display: inline-block;
-    width: 100%;
-    padding: 60px 100px;
+    width: 1000px;
+    padding: 80px 60px;
+    margin-left: 113px;
     box-sizing: border-box;
     .title {
       text-align: center;
@@ -114,27 +114,84 @@ export default {
         transparent 4px,
         transparent 8px
       );
-      margin-top: 50px;
-      margin-bottom: 20px;
+      margin: 50px 0;
       height: 2px;
     }
-    .text {
+    #markdown {
       width: 100%;
-      margin-top: 50px;
-      font-size: 16px;
-      line-height: 2;
+      font-size: 15px;
+      line-height: 1.8;
+      h1 {
+        margin: 30px 0;
+      }
+      h2 {
+        margin: 26px 0;
+      }
+      h3 {
+        margin: 22px 0;
+        font-weight: normal;
+      }
+      h4 {
+        margin: 18px 0;
+      }
+      h5 {
+        margin: 12px 0;
+      }
+      h6 {
+        margin: 8px 0;
+      }
+      a {
+        color: #0681d0;
+      }
+      ol {
+        padding: 0px 25px;
+        margin: 10px 0;
+        li {
+          list-style-type: decimal;
+        }
+      }
+      ul {
+        padding: 0px 25px;
+        margin: 10px 0;
+        li {
+          list-style-type: disc;
+        }
+      }
       pre {
         background-color: #f7f7f7;
         padding: 10px;
+        overflow-x: auto;
       }
       img {
-        width: 100%;
+        width: auto;
+        max-width: 100%;
+        margin: 10px 0;
       }
       blockquote {
-        padding: 0 15px;
-        color: #666;
-        border-left: 4px solid #ddd;
-        margin: 0;
+        padding: 20px;
+        background-color: #fafafa;
+        border-left: 6px solid #e6e6e6;
+        font-size: 16px;
+        line-height: 30px;
+        margin: 20px 0;
+      }
+      table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+        line-height: 35px;
+        tr:nth-of-type(2n) {
+          background-color: hsla(0, 0%, 70.2%, 0.15);
+        }
+        th {
+          font-weight: bold;
+          padding-left: 15px;
+          border: 1px solid #eee;
+        }
+        td {
+          padding-left: 15px;
+          border: 1px solid #eee;
+        }
       }
     }
   }

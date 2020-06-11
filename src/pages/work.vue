@@ -149,12 +149,14 @@ export default {
 </script>
 <style lang="scss">
 .work {
-  padding: 100px 0;
+  margin-top: 80px;
   background-color: #f7f7f7;
   text-align: center;
   .wrapper {
     width: 1000px;
     display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 50px;
     .work-list {
       text-align: left;
       font-size: 18px;

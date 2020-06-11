@@ -89,7 +89,8 @@ export default {
   text-align: center;
   .paper {
     background-color: #ffffff;
-    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 50px;
     display: inline-block;
     width: 1000px;
     padding: 80px 50px;

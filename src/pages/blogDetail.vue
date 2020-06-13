@@ -2,16 +2,16 @@
   <div class="blog-detail">
     <div class="container">
       <div class="paper">
-        <div class="title">{{title}}</div>
+        <div class="title">{{blog.title}}</div>
         <div class="meta">
-          <img src="/imgs/ic-eye.png" alt />
-          <span>{{visiter}}</span>
-          <img src="/imgs/ic-comment.png" alt />
-          <span>{{comment}}</span>
-          <img src="/imgs/ic-heart.png" alt />
-          <span>{{collect}}</span>
-          <img src="/imgs/ic-date.png" alt />
-          <span>{{date}}</span>
+          <img src="/icon/ic-eye.png" alt />
+          <span>{{blog.visiter}}</span>
+          <img src="/icon/ic-comment.png" alt />
+          <span>{{blog.comment}}</span>
+          <img src="/icon/ic-heart.png" alt />
+          <span>{{blog.collect}}</span>
+          <img src="/icon/ic-date.png" alt />
+          <span>{{blog.date}}</span>
         </div>
         <div class="divider"></div>
         <div id="markdown"></div>
@@ -39,12 +39,7 @@ export default {
   name: "blog-detail",
   data() {
     return {
-      title: "Android 缩减、混淆处理和优化您的应用",
-      visiter: 10,
-      comment: 3,
-      collect: 5,
-      date: "2020-02-05",
-      text: ""
+      blog: {}
     };
   },
   mounted() {
@@ -74,9 +69,9 @@ export default {
         walkTokens: null,
         xhtml: false
       });
-      this.axios.get("/jsonData2").then(res => {
-        this.text = res.data;
-        document.getElementById("markdown").innerHTML = marked(this.text);
+      this.axios.get(`api/blog/${1}`).then(data => {
+        this.blog = data;
+        document.getElementById("markdown").innerHTML = marked(data.text);
       });
     }
   }

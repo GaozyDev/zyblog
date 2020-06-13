@@ -3,13 +3,14 @@
     <div class="container">
       <div class="wrapper">
         <div class="work-list">
-          <span>Cool天气</span> /
-          <span>Compass</span> /
-          <span>慕聊</span>
+          <span v-for="(item, index) in workList" v-bind:key="index">
+            <span>{{item.name}}</span>
+            <span v-if="index!=(workList.length-1)">/</span>
+          </span>
         </div>
         <div class="work-top clearfix">
           <div class="icon">
-            <img src="/imgs/ic-coolweather-launcher.png" alt />
+            <img src="/api/image/ic-coolweather-launcher.png" alt />
           </div>
           <div class="info">
             <div class="name">
@@ -20,7 +21,7 @@
             <div class="download">下载APK</div>
           </div>
           <div class="qrcode">
-            <img src="/imgs/coolweather-qrcode.png" />
+            <img src="/api/image/qrcode-coolweather.png" />
             <p>扫码下载APK</p>
           </div>
         </div>
@@ -29,58 +30,40 @@
           <div class="content">
             <div class="screenshot-list">
               <img
-                src="/imgs/coolweather.png"
+                src="/api/image/coolweather.png"
                 data-toggle="modal"
                 data-target="#ex-screenshot-modal"
                 onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(0);"
               />
               <img
-                src="/imgs/coolweather.png"
+                src="/api/image/coolweather.png"
                 data-toggle="modal"
                 data-target="#ex-screenshot-modal"
                 onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(1);"
               />
               <img
-                src="/imgs/coolweather.png"
+                src="/api/image/coolweather.png"
                 data-toggle="modal"
                 data-target="#ex-screenshot-modal"
                 onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(2);"
               />
               <img
-                src="/imgs/coolweather.png"
+                src="/api/image/coolweather.png"
                 data-toggle="modal"
                 data-target="#ex-screenshot-modal"
                 onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(3);"
               />
               <img
-                src="/imgs/coolweather.png"
+                src="/api/image/coolweather.png"
                 data-toggle="modal"
                 data-target="#ex-screenshot-modal"
                 onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(4);"
               />
               <img
-                src="/imgs/coolweather.png"
+                src="/api/image/coolweather.png"
                 data-toggle="modal"
                 data-target="#ex-screenshot-modal"
                 onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(5);"
-              />
-              <img
-                src="/imgs/coolweather.png"
-                data-toggle="modal"
-                data-target="#ex-screenshot-modal"
-                onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(6);"
-              />
-              <img
-                src="/imgs/coolweather.png"
-                data-toggle="modal"
-                data-target="#ex-screenshot-modal"
-                onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(7);"
-              />
-              <img
-                src="/imgs/coolweather.png"
-                data-toggle="modal"
-                data-target="#ex-screenshot-modal"
-                onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(8);"
               />
             </div>
           </div>
@@ -144,7 +127,23 @@
 </template>
 <script>
 export default {
-  name: "work"
+  name: "work",
+  data() {
+    return {
+      workList: [],
+      index: 0
+    };
+  },
+  mounted() {
+    this.getWorkList();
+  },
+  methods: {
+    getWorkList() {
+      this.axios.get("api/worklist").then(data => {
+        this.workList = data.workList;
+      });
+    }
+  }
 };
 </script>
 <style lang="scss">

@@ -141,7 +141,7 @@ export default {
       },
       works: [
         {
-          img: "/imgs/coolweather.png",
+          img: "/api/image/coolweather.png",
           title: "Cool天气",
           desc:
             "使用Flutter开发的天气APP，准确预报未来两小时的降雨情况，精确到分钟级。",
@@ -151,7 +151,7 @@ export default {
             "目前APP发布在酷安应用商店，感兴趣的话，可以点击下面的链接进行下载。 https://www.coolapk.com/apk/www.gl.com.coolweather"
         },
         {
-          img: "/imgs/compass.jpg",
+          img: "/api/image/compass.jpg",
           title: "指南针",
           desc: "一款简单好用的安卓指南针APP",
           devBackground:
@@ -167,7 +167,7 @@ export default {
 <style lang="scss">
 .home {
   .profile {
-    background: transparent url("/imgs/home-bg.jpg") center center;
+    background: transparent url("/image/bg-home-top.jpg") center center;
     background-size: cover;
     min-height: 840px;
     text-align: center;
@@ -209,7 +209,7 @@ export default {
         width: 600px;
         height: 600px;
         background-size: cover;
-        background: url("/imgs/portrait.png") no-repeat center right;
+        background: url("/image/portrait.png") no-repeat center right;
         background-size: contain;
       }
     }

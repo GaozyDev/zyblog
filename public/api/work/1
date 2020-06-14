@@ -1,0 +1,70 @@
+{
+  "code": 200,
+  "message": "",
+  "data": {
+    "currentId": "1",
+    "workList": [
+      {
+        "id": "1",
+        "name": "Cool天气"
+      },
+      {
+        "id": "2",
+        "name": "Compass"
+      }
+    ],
+    "work": {
+      "name": "Cool天气",
+      "version": "1.5.8",
+      "meta": "21.3M / 3465下载 / 176人关注 / 71个评论 / 简体中文",
+      "logo": "/api/image/ic-coolweather-launcher.png",
+      "qrcode": "/api/image/qrcode-coolweather.png",
+      "screenshot": [
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png"
+      ],
+      "versionIntroduct": [
+        "优化新型冠状病毒肺炎疫情地图页加载速度",
+        "修复了一些已知的小bug"
+      ],
+      "workDesc": [
+        "纯Flutter开发的跨平台APP，支持Android和iOS双平台，未来会添加Web端支持",
+        "界面设计参考一加天气APP，简洁流畅，杜绝广告",
+        "支持实时预测未来两小时降雨趋势",
+        "注：APP内使用了大量一加官方APP的图片资源和UI设计，如造成侵权，请联系作者，必在第一时间删除相关资源",
+        "代码地址∶https://github.com/GaozyDev/CoolWeather"
+      ],
+      "comment": {
+        "grade": 4.6,
+        "quantity": 18
+      },
+      "detailInfo": [
+        "应用包名：www.gl.com.coolweather",
+        "更新时间：2020-03-07 14:40:05",
+        "支持ROM：4.1+",
+        "开发者名称：SunnyGL"
+      ],
+      "permission": [
+        "大致位置（基于网络）",
+        "精确位置（基于GPS和网络）",
+        "获取额外的位置信息提供程序命令",
+        "查看网络连接",
+        "查看WLAN连接",
+        "与蓝牙设备配对",
+        "访问蓝牙设置",
+        "连接WLAN网络和断开连接",
+        "完全的网络访问权限",
+        "读取手机状态和身份",
+        "修改或删除您的USB存储设备中的内容",
+        "更改系统显示设置",
+        "防止手机休眠",
+        "读取您的USB存储设备中的内容",
+        "修改系统设置"
+      ]
+    }
+  }
+}

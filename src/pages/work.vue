@@ -4,24 +4,28 @@
       <div class="wrapper">
         <div class="work-list">
           <span v-for="(item, index) in workList" v-bind:key="index">
-            <span>{{item.name}}</span>
-            <span v-if="index!=(workList.length-1)">/</span>
+            <span
+              class="name"
+              v-bind:class="{'current':currentId==item.id}"
+              v-on:click="getWorkData(item.id)"
+            >{{item.name}}</span>
+            <span class="divider" v-if="index!=(workList.length-1)">/</span>
           </span>
         </div>
         <div class="work-top clearfix">
           <div class="icon">
-            <img src="/api/image/ic-coolweather-launcher.png" alt />
+            <img v-bind:src="work.logo" alt />
           </div>
           <div class="info">
             <div class="name">
-              Cool天气
-              <span>1.5.8</span>
+              {{work.name}}
+              <span>{{work.version}}</span>
             </div>
-            <div class="message">21.3M / 3465下载 / 176人关注 / 71个评论 / 简体中文</div>
+            <div class="meta">{{work.meta}}</div>
             <div class="download">下载APK</div>
           </div>
           <div class="qrcode">
-            <img src="/api/image/qrcode-coolweather.png" />
+            <img v-bind:src="work.qrcode" />
             <p>扫码下载APK</p>
           </div>
         </div>
@@ -29,63 +33,26 @@
           <div class="title">应用截图</div>
           <div class="content">
             <div class="screenshot-list">
-              <img
-                src="/api/image/coolweather.png"
-                data-toggle="modal"
-                data-target="#ex-screenshot-modal"
-                onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(0);"
-              />
-              <img
-                src="/api/image/coolweather.png"
-                data-toggle="modal"
-                data-target="#ex-screenshot-modal"
-                onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(1);"
-              />
-              <img
-                src="/api/image/coolweather.png"
-                data-toggle="modal"
-                data-target="#ex-screenshot-modal"
-                onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(2);"
-              />
-              <img
-                src="/api/image/coolweather.png"
-                data-toggle="modal"
-                data-target="#ex-screenshot-modal"
-                onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(3);"
-              />
-              <img
-                src="/api/image/coolweather.png"
-                data-toggle="modal"
-                data-target="#ex-screenshot-modal"
-                onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(4);"
-              />
-              <img
-                src="/api/image/coolweather.png"
-                data-toggle="modal"
-                data-target="#ex-screenshot-modal"
-                onclick="$(&quot;#ex-screenshot-carousel&quot;).carousel(5);"
-              />
+              <img v-for="(url, index) in work.screenshot" v-bind:key="index" v-bind:src="url" />
             </div>
           </div>
           <div class="title">新版特性</div>
           <div class="content">
-            1.优化新型冠状病毒肺炎疫情地图页加载速度
-            <br />2.修复了一些已知的小bug
+            <span
+              v-for="(introduct,index) in work.versionIntroduct"
+              v-bind:key="index"
+            >{{introduct}}</span>
           </div>
           <div class="title">应用简介</div>
           <div class="content">
-            纯Flutter开发的跨平台APP，支持Android和iOS双平台，未来会添加Web端支持
-            <br />界面设计参考一加天气APP，简洁流畅，杜绝广告
-            <br />支持实时预测未来两小时降雨趋势
-            <br />注：APP内使用了大量一加官方APP的图片资源和UI设计，如造成侵权，请联系作者，必在第一时间删除相关资源
-            <br />代码地址∶https://github.com/GaozyDev/CoolWeather
+            <span v-for="(desc,index) in work.workDesc" v-bind:key="index">{{desc}}</span>
           </div>
           <div class="title">应用评分</div>
           <div class="content clearfix">
-            <div class="grade">4.5</div>
+            <div class="grade">{{work.comment.gradle}}</div>
             <div class="grade-star">
               <div class="star"></div>
-              <div class="rater">共18个评分</div>
+              <div class="rater">共{{work.comment.quantity}}个评分</div>
             </div>
             <div class="grade-dist">
               <div class="grade-5"></div>
@@ -97,28 +64,11 @@
           </div>
           <div class="title">详细信息</div>
           <div class="content">
-            应用包名：www.gl.com.coolweather
-            <br />更新时间：2020-03-07 14:40:05
-            <br />支持ROM：4.1+
-            <br />开发者名称：SunnyGL
+            <span v-for="(info,index) in work.detailInfo" v-bind:key="index">{{info}}</span>
           </div>
           <div class="title">权限信息</div>
           <div class="content">
-            · 大致位置（基于网络）
-            <br />· 精确位置（基于GPS和网络）
-            <br />· 获取额外的位置信息提供程序命令
-            <br />· 查看网络连接
-            <br />· 查看WLAN连接
-            <br />· 与蓝牙设备配对
-            <br />· 访问蓝牙设置
-            <br />· 连接WLAN网络和断开连接
-            <br />· 完全的网络访问权限
-            <br />· 读取手机状态和身份
-            <br />· 修改或删除您的USB存储设备中的内容
-            <br />· 更改系统显示设置
-            <br />· 防止手机休眠
-            <br />· 读取您的USB存储设备中的内容
-            <br />· 修改系统设置
+            <span v-for="(permission,index) in work.permission" v-bind:key="index">{{permission}}</span>
           </div>
         </div>
       </div>
@@ -131,16 +81,19 @@ export default {
   data() {
     return {
       workList: [],
-      index: 0
+      currentId: 0,
+      work: {}
     };
   },
   mounted() {
-    this.getWorkList();
+    this.getWorkData(1);
   },
   methods: {
-    getWorkList() {
-      this.axios.get("api/worklist").then(data => {
+    getWorkData(id) {
+      this.axios.get(`api/work/${id}`).then(data => {
         this.workList = data.workList;
+        this.currentId = data.currentId;
+        this.work = data.work;
       });
     }
   }
@@ -161,11 +114,17 @@ export default {
       font-size: 18px;
       margin-bottom: 10px;
       padding-left: 10px;
-      span {
+      .name {
         cursor: pointer;
         &:hover {
           color: #0681d0;
         }
+      }
+      .current {
+        color: #000000;
+      }
+      .divider {
+        margin: 0 5px;
       }
     }
     .work-top {
@@ -190,7 +149,7 @@ export default {
             font-weight: lighter;
           }
         }
-        .message {
+        .meta {
           font-size: 14px;
           color: #999999;
           margin-top: 6px;
@@ -243,6 +202,9 @@ export default {
         margin-bottom: 20px;
         width: 90%;
         line-height: 22px;
+        span {
+          display: block;
+        }
         .screenshot-list {
           height: 310px;
           white-space: nowrap;
@@ -273,7 +235,7 @@ export default {
             line-height: 14px;
             background-repeat: no-repeat;
             background-position: 0 0;
-            background-image: url("/imgs/ic-stars.gif");
+            background-image: url("/icon/ic-stars.gif");
           }
           .rater {
             margin-top: 4px;

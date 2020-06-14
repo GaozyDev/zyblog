@@ -1,0 +1,51 @@
+{
+  "code": 200,
+  "message": "",
+  "data": {
+    "currentId": "2",
+    "workList": [
+      {
+        "id": "1",
+        "name": "Cool天气"
+      },
+      {
+        "id": "2",
+        "name": "Compass"
+      }
+    ],
+    "work": {
+      "name": "Compass",
+      "version": "1.2.1",
+      "meta": "1.3M / 465下载 / 76人关注 / 7个评论 / 简体中文",
+      "logo": "/api/image/ic-coolweather-launcher.png",
+      "qrcode": "/api/image/qrcode-coolweather.png",
+      "screenshot": [
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png",
+        "/api/image/coolweather.png"
+      ],
+      "versionIntroduct": [
+        "版本介绍"
+      ],
+      "workDesc": [
+        "项目描述"
+      ],
+      "comment": {
+        "grade": 4.8,
+        "quantity": 18
+      },
+      "detailInfo": [
+        "应用包名：www.gl.com.compass",
+        "更新时间：2020-03-07 14:40:05",
+        "支持ROM：5.1+",
+        "开发者名称：SunnyGL"
+      ],
+      "permission": [
+        "权限"
+      ]
+    }
+  }
+}
